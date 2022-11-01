@@ -27,14 +27,17 @@
   overflow-y: scroll;
 }
 
+/* Не могли бы вы посоветовать, как изменить высоту скролбара? Я попробовала всё 
+и даже получилось ограничить траекторию ползунка, но если у скролбара есть
+background, то всё равно цветом выделяется по размеру контента
+*/
+
 .scrollSection::-webkit-scrollbar {
   width: 8px;
-  height: 664px;
-  background-color: #2f2f37;
+  background: #2f2f37;
 }
 
 .scrollSection::-webkit-scrollbar-thumb {
-  background-color: #8585ad;
+  background: #8585ad;
   width: 8px;
-  height: 492px;
 }
