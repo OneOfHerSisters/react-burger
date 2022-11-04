@@ -9,10 +9,10 @@ const BurgerConstructor = ({data}) => {
                  <ul className={constructorStyles.constructorScroll}>
                  {data.filter(elem => elem['type'] === 'bun').map(item => {
                           return  (
-                          <li style={{listStyle: 'none'}} className='ml-8 mr-2'>
+                          <li key={item._id} style={{listStyle: 'none'}} className='ml-8 mr-2'>
                             <ConstructorElement
                                 type="top"
-                                isLocked={true}
+                                isLocked
                                 text={`${item.name} (верх)`}
                                 price={item.price}
                                 thumbnail={item.image}
@@ -24,7 +24,7 @@ const BurgerConstructor = ({data}) => {
                     {
                     data.filter(elem => elem['type'] !== 'bun').map(item => {
                         return (
-                            <li className='mr-2' style={{listStyle: 'none', display: 'flex', alignItems: 'center'}}>
+                            <li key={item._id} className='mr-2' style={{listStyle: 'none', display: 'flex', alignItems: 'center'}}>
                                 <div className='mr-3' style={{display: 'inline-block'}}>
                                     <DragIcon/>
                                 </div>
@@ -40,10 +40,10 @@ const BurgerConstructor = ({data}) => {
                 {
                     data.filter(elem => elem['type'] === 'bun').map(item => {
                         return  (
-                        <li style={{listStyle: 'none'}} className='ml-8 mr-2'>
+                        <li key={item._id} style={{listStyle: 'none'}} className='ml-8 mr-2'>
                             <ConstructorElement
                                 type="bottom"
-                                isLocked={true}
+                                isLocked
                                 text={`${item.name} (низ)`}
                                 price={item.price}
                                 thumbnail={item.image}
