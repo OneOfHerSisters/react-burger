@@ -2,8 +2,19 @@ import {CurrencyIcon, DragIcon, Button, ConstructorElement} from '@ya.praktikum/
 import React from 'react';
 import constructorStyles from './Burger-constructor.module.css';
 import PropTypes from 'prop-types';
+import OrderDetails from '../order-details/order-details';
 
 const BurgerConstructor = ({data}) => {
+    const [ordered, setOrder] = React.useState(false);
+
+    const handleOrder = () => {
+        setOrder(true)
+    }
+
+    const handleClose = () => {
+        setOrder(false)
+    }
+
     return (
             <section className={`${constructorStyles.burgerConstructor} pl-4`}>
                  <ul className={constructorStyles.constructorScroll}>
@@ -57,8 +68,9 @@ const BurgerConstructor = ({data}) => {
                         <span className="text text_type_digits-medium mr-2">0</span>
                         <CurrencyIcon/>
                     </div>
-                    <Button type="primary" size="medium">Оформить заказ</Button>
+                    <Button onClick={handleOrder} type="primary" size="medium">Оформить заказ</Button>
                 </div>
+                {ordered && <OrderDetails handleClose={handleClose}></OrderDetails>}
             </section>
         )
 }

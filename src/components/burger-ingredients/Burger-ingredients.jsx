@@ -3,6 +3,8 @@ import React from 'react';
 import ingredientsStyles from './Burger-ingredients.module.css';
 import Ingredient from '../ingredient/Ingredient';
 import PropTypes from 'prop-types';
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 
 const BurgerIngredients = ({data}) => {
@@ -10,7 +12,27 @@ const BurgerIngredients = ({data}) => {
     const two = "two";
     const three = "three";
     const [current, setCurrent] = React.useState('one')
+    const [info, setInfo] = React.useState()
+
+    const handleIngredientClick = (event, item) => {
+      event.stopPropagation();
+      setInfo({
+          img: item.image,
+          price: item.price,
+          name: item.name,
+          calories: item.calories,
+          fat: item.fat,
+          carbohydrates: item.carbohydrates,
+          proteins: item.proteins
+      })
+    }
+    
+    const resetInfoState = () => {
+      setInfo()
+    }
+
     return (
+      <>
         <section className={ingredientsStyles.burgerIngredients}>
             <h1 className={`text text_type_main-large ${ingredientsStyles.title}`}>Соберите бургер</h1>
           <div style={{ display: 'flex' }}>
@@ -30,7 +52,7 @@ const BurgerIngredients = ({data}) => {
               <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
                   {
                       data.filter(elem => elem['type'] === 'bun').map(item => {
-                          return Ingredient(item);
+                          return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
                       })
                   }
               </ul>
@@ -40,7 +62,7 @@ const BurgerIngredients = ({data}) => {
             <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
                   {
                       data.filter(elem => elem['type'] === 'sauce').map(item => {
-                          return Ingredient(item);
+                        return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
                       })
                   }
               </ul>
@@ -50,13 +72,15 @@ const BurgerIngredients = ({data}) => {
               <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
                   {
                       data.filter(elem => elem['type'] === 'main').map(item => {
-                          return Ingredient(item);
+                        return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
                       })
                   }
               </ul>
               </div>
             </div>
-          </section>
+          </section> 
+          {info && <IngredientDetails handleClose={resetInfoState} item={info}></IngredientDetails>}
+          </>
         )
 }
 

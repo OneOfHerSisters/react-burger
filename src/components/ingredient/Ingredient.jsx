@@ -2,19 +2,20 @@ import {Typography, Box, CurrencyIcon} from '@ya.praktikum/react-developer-burge
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Ingredient = (props)  => {
+const Ingredient = ({handleClick, item})  => {
     return (
-        <li key={props._id} style={{ listStyleType: "none", maxHeight: 208}}>
-            <img src={props.image}/>
+        <li onClick={(e) => handleClick(e, item)} key={item._id} style={{ listStyleType: "none", maxHeight: 208}}>
+            <img src={item.image}/>
             <div>
-                <div className='mt-1 mb-1' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><span className="text text_type_digits-default mr-2">{props.price}</span><CurrencyIcon/></div>
-                <h3 className="text text_type_main-default mb-6">{props.name}</h3>
+                <div className='mt-1 mb-1' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><span className="text text_type_digits-default mr-2">{item.price}</span><CurrencyIcon/></div>
+                <h3 className="text text_type_main-default mb-6">{item.name}</h3>
             </div>
         </li>
     )
 }
 
-Ingredient.propTypes = PropTypes.shape({
+Ingredient.propTypes = {handleClick: PropTypes.func,
+    item: PropTypes.shape({
     _id:  PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -28,7 +29,7 @@ Ingredient.propTypes = PropTypes.shape({
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
     __v :  PropTypes.number,
-  });
+  })}
   
   
 

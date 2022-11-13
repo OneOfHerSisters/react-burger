@@ -1,0 +1,23 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.nutrients {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 60px;
+}
+
+.nutrient {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
