@@ -16,11 +16,19 @@ function App() {
   const url = 'https://norma.nomoreparties.space/api/ingredients';
 
    React.useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
       setState({ ...state, hasError: false, isLoading: true });
-      const res = await fetch(url);
-      const data = await res.json();
-      setState({ ...state, data: data.data, isLoading: false });
+      fetch(url)
+        .then((res) => {
+          if (res.ok) {
+          return res.json();
+          }
+          return Promise.reject(`Что-то пошло не так: ${res.status}`)
+        })
+        .then((data) => setState({ ...state, data: data.data, isLoading: false }))
+        .catch(e => {
+          setState({ ...state, hasError: true, isLoading: false });
+        })
     }
     getData();
   }, [])
@@ -33,13 +41,6 @@ function App() {
       <BurgerIngredients data = {state.data}/>
       <BurgerConstructor data = {state.data}/>
      </main>
-     {/* <div style={{overflow: 'hidden'}}>
-                <button onClick={handleOpenModal}>Открыть модальное окно</button>
-                {visible &&
-                  <Modal closeModal={handleCloseModal}>
-                    <IngredientDetails></IngredientDetails>
-                  </Modal>}
-    </div> */}
     </div>
   );
 }
