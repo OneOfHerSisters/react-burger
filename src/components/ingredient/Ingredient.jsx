@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Ingredient = ({handleClick, item})  => {
     return (
-        <li onClick={(e) => handleClick(e, item)} style={{ listStyleType: "none", maxHeight: 208, cursor: 'pointer'}}>
+        <li onClick={(e) => handleClick(e, item)} style={{ listStyleType: "none", cursor: 'pointer'}}>
             <img alt='что-то вкусное' src={item.image}/>
             <div>
                 <div className='mt-1 mb-1' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><span className="text text_type_digits-default mr-2">{item.price}</span><CurrencyIcon/></div>
