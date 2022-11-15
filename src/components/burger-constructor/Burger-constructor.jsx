@@ -1,6 +1,6 @@
 import {CurrencyIcon, DragIcon, Button, ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import constructorStyles from './Burger-constructor.module.css';
+import constructorStyles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 import OrderDetails from '../order-details/order-details';
 
@@ -22,7 +22,7 @@ const BurgerConstructor = ({data}) => {
                           return  (
                           <li key={item._id} style={{listStyle: 'none'}} className='ml-8 mr-2'>
                             <ConstructorElement
-                                type="top"
+                                type='top'
                                 isLocked
                                 text={`${item.name} (верх)`}
                                 price={item.price}
@@ -53,7 +53,7 @@ const BurgerConstructor = ({data}) => {
                         return  (
                         <li key={item._id} style={{listStyle: 'none'}} className='ml-8 mr-2'>
                             <ConstructorElement
-                                type="bottom"
+                                type='bottom'
                                 isLocked
                                 text={`${item.name} (низ)`}
                                 price={item.price}
@@ -65,10 +65,10 @@ const BurgerConstructor = ({data}) => {
                 </ul>
                 <div className='mt-10' style={{height: 64, display: 'flex', alignItems: 'center'}}>
                     <div className='mr-10' style={{display: 'inline-block'}}>
-                        <span className="text text_type_digits-medium mr-2">0</span>
+                        <span className='text text_type_digits-medium mr-2'>0</span>
                         <CurrencyIcon/>
                     </div>
-                    <Button onClick={handleOrder} type="primary" size="medium">Оформить заказ</Button>
+                    <Button htmlType='submit' onClick={handleOrder} type='primary' size='medium'>Оформить заказ</Button>
                 </div>
                 {ordered && <OrderDetails handleClose={handleClose}></OrderDetails>}
             </section>

@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import Header from '../app-header/App-header';
-import Modal from '../modal/modal';
-import BurgerIngredients from  '../burger-ingredients/Burger-ingredients'
-import BurgerConstructor from '../burger-constructor/Burger-constructor';
-import IngredientDetails from '../ingredient-details/ingredient-details'; 
+import Header from '../app-header/app-header';
+import BurgerIngredients from  '../burger-ingredients/burger-ingredients'
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import {baseUrl} from '../../utils/utils';
+import Api from '../api/api';
+
+const api = new Api(baseUrl)
 
 function App() {
   const [state, setState] = React.useState({ 
@@ -13,24 +15,14 @@ function App() {
     data: []
   })
 
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
-
    React.useEffect(() => {
-    const getData = () => {
-      setState({ ...state, hasError: false, isLoading: true });
-      fetch(url)
-        .then((res) => {
-          if (res.ok) {
-          return res.json();
-          }
-          return Promise.reject(`Что-то пошло не так: ${res.status}`)
-        })
-        .then((data) => setState({ ...state, data: data.data, isLoading: false }))
-        .catch(e => {
-          setState({ ...state, hasError: true, isLoading: false });
-        })
-    }
-    getData();
+    setState({ ...state, hasError: false, isLoading: true });
+    api
+      .getData()      
+      .then((data) => setState({ ...state, data: data.data, isLoading: false }))
+      .catch(e => {
+        setState({ ...state, hasError: true, isLoading: false });
+      })
   }, [])
 
 

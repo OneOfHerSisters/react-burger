@@ -1,4 +1,4 @@
-.modal-overlay {
+.modalOverlay {
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   position: absolute;
@@ -8,4 +8,5 @@
   right: 0%;
   top: 0%;
   bottom: 0%;
+  overflow: hidden;
 }

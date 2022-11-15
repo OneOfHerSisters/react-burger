@@ -1,11 +1,11 @@
-import {Typography, Box, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 const Ingredient = ({handleClick, item})  => {
     return (
-        <li onClick={(e) => handleClick(e, item)} key={item._id} style={{ listStyleType: "none", maxHeight: 208}}>
-            <img src={item.image}/>
+        <li onClick={(e) => handleClick(e, item)} style={{ listStyleType: "none", maxHeight: 208, cursor: 'pointer'}}>
+            <img alt='что-то вкусное' src={item.image}/>
             <div>
                 <div className='mt-1 mb-1' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><span className="text text_type_digits-default mr-2">{item.price}</span><CurrencyIcon/></div>
                 <h3 className="text text_type_main-default mb-6">{item.name}</h3>

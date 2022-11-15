@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {CloseIcon, Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import './modal.css';
 import ModalOverlay from '../modal-overlay/modal-overlay';
+import PropTypes from 'prop-types'
 
 export default function Modal({handleClose, children}) {
     useEffect(() => {
@@ -24,3 +25,9 @@ export default function Modal({handleClose, children}) {
     )
 }
 
+Modal.propTypes = {handleClose: PropTypes.func.isRequired, 
+    children: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.node),
+            PropTypes.node
+        ]).isRequired
+    }

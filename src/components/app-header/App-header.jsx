@@ -1,6 +1,6 @@
-import {Logo, BurgerIcon, ListIcon, ProfileIcon, Typography, Box} from '@ya.praktikum/react-developer-burger-ui-components';
+import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import headerStyles from './App-header.module.css';
+import headerStyles from './app-header.module.css';
 
 class Header extends React.Component {
     render() {

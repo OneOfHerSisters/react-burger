@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import './modal-overlay.css';
+import overlayStyles from './modal-overlay.module.css';
+import PropTypes from 'prop-types'
 
 const modalRoot = document.getElementById('react-modals'); 
 
 export default function ModalOverlay ({handleClose, children}) {
-        
         return ReactDOM.createPortal(
                 (       
-                <div onClick={handleClose} className="modal-overlay">        
+                <div onClick={handleClose} className={overlayStyles.modalOverlay}>        
                         {children}
                 </div>
                 ), 
@@ -16,3 +16,10 @@ export default function ModalOverlay ({handleClose, children}) {
             );
 
 }
+
+ModalOverlay.propTypes = {handleClose: PropTypes.func.isRequired, 
+        children: PropTypes.oneOfType([
+                PropTypes.arrayOf(PropTypes.node),
+                PropTypes.node
+            ]).isRequired
+        }

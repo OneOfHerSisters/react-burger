@@ -1,9 +1,8 @@
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import ingredientsStyles from './Burger-ingredients.module.css';
-import Ingredient from '../ingredient/Ingredient';
+import ingredientsStyles from './burger-ingredients.module.css';
+import Ingredient from '../ingredient/ingredient';
 import PropTypes from 'prop-types';
-import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
 
@@ -31,6 +30,23 @@ const BurgerIngredients = ({data}) => {
       setInfo()
     }
 
+    React.useEffect(() => {
+      const element = document.getElementById(current);
+      element.scrollIntoView();
+    }, [current])
+   
+    const bun = React.useMemo(() => data.filter(elem => elem['type'] === 'bun').map(item => {
+      return <Ingredient key={item._id} item={item} handleClick={handleIngredientClick}></Ingredient>
+    }), [data]);
+
+    const sauce = React.useMemo(() => data.filter(elem => elem['type'] === 'sauce').map(item => {
+      return <Ingredient key={item._id} item={item} handleClick={handleIngredientClick}></Ingredient>
+    }), [data]);
+
+    const main = React.useMemo(() => data.filter(elem => elem['type'] === 'main').map(item => {
+      return <Ingredient key={item._id} item={item} handleClick={handleIngredientClick}></Ingredient>
+    }), [data]);
+
     return (
       <>
         <section className={ingredientsStyles.burgerIngredients}>
@@ -47,34 +63,22 @@ const BurgerIngredients = ({data}) => {
             </Tab>
           </div>
           <div className={ingredientsStyles.scrollSection}>
-            <div>
+            <div id='one'>
               <h2 className={`text text_type_main-medium ${ingredientsStyles.ingredientName}`}>Булки</h2>
               <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
-                  {
-                      data.filter(elem => elem['type'] === 'bun').map(item => {
-                          return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
-                      })
-                  }
+                  { bun }
               </ul>
             </div>
-            <div>
+            <div id='two'>
             <h2  className={`text text_type_main-medium ${ingredientsStyles.ingredientName}`}>Соусы</h2>
             <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
-                  {
-                      data.filter(elem => elem['type'] === 'sauce').map(item => {
-                        return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
-                      })
-                  }
+                  { sauce }
               </ul>
               </div>
-              <div>
+              <div id='three'>
               <h2  className={`text text_type_main-medium ${ingredientsStyles.ingredientName}`}>Начинки</h2>
               <ul className={`pl-4 pr-4 pt-6 ${ingredientsStyles.ingredientSection}`}>
-                  {
-                      data.filter(elem => elem['type'] === 'main').map(item => {
-                        return <Ingredient item={item} handleClick={handleIngredientClick}></Ingredient>
-                      })
-                  }
+                  { main }
               </ul>
               </div>
             </div>
@@ -82,7 +86,7 @@ const BurgerIngredients = ({data}) => {
           {info && <IngredientDetails handleClose={resetInfoState} item={info}></IngredientDetails>}
           </>
         )
-}
+};
 
 BurgerIngredients.propTypes = {data: PropTypes.arrayOf(PropTypes.shape({
   _id:  PropTypes.string.isRequired,
